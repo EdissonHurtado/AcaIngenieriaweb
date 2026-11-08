@@ -319,6 +319,20 @@
     .detail-actions { display: grid; gap: 10px; }
 
     /* ---- carrito ---- */
+    /* Limita la altura de los productos y habilita scroll interno */
+#cart-items {
+  max-height: 220px;
+  overflow-y: auto;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* Ajusta el contenedor del modal para que no se desborde */
+#cart-modal .modal-content {
+  max-height: 85vh;
+  overflow-y: auto;
+}
     .cart-items { display: flex; flex-direction: column; }
     .cart-item {
       display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center;
@@ -545,7 +559,7 @@
           <label for="cust-notes">Notas especiales (opcional)</label>
           <textarea id="cust-notes" name="notes" rows="2" maxlength="300"></textarea>
         </div>
-        <button type="submit" class="btn btn-whatsapp" id="submit-order">Confirmar y enviar pedido por WhatsApp 📲</button>
+        <button type="submit" class="btn btn-whatsapp" id="submit-order">Confirmar    pedido</button>
       </form>
     </div>
   </div>
@@ -557,15 +571,30 @@
   <script>
     /* =========================================================
     CONFIGURACIÓN DEL BACKEND SERVERLESS (Google Apps Script)
-    ========================================================= */
-    const CONFIG = {
-      APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzwGMFd6We4AspPQKu__pVNb0A4RyQkyP_t9blYCp3t4_CHbIc49lNq2TN2nqbsRReu/exec",
-      API_TOKEN: "acaingweb123",
-      PHONE_WHATSAPP: "573105287394",   //
-      TIMEOUT_MS: 12000,
-      MAX_QTY: 99
-    };
+   /* =========================================================
+   CONFIGURACIÓN DEL BACKEND SERVERLESS (Google Apps Script)
+========================================================= */
+const CONFIG = {
+  VERSION: "1.0.1",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzwGMFd6We4AspPQKu__pVNb0A4RyQkyP_t9blYCp3t4_CHbIc49lNq2TN2nqbsRReu/exec",
+  API_TOKEN: "acaingweb123",
+  PHONE_WHATSAPP: "573105287394",
+  TIMEOUT_MS: 12000,
+  MAX_QTY: 99
+};
 
+(function checkAppVersion() {
+  const currentVersion = localStorage.getItem("app_version");
+  if (currentVersion !== CONFIG.VERSION) {
+    console.log("Nueva versión detectada. Actualizando caché local...");
+    localStorage.clear();
+    sessionStorage.clear();
+    localStorage.setItem("app_version", CONFIG.VERSION);
+    if (currentVersion) {
+      window.location.reload(true);
+    }
+  }
+})();
     const KEYS = { cart: "lys_cart", favs: "lys_favs", viewed: "lys_viewed", cache: "lys_catalog_cache" };
 
     /* ---------- utilidades ---------- */
@@ -969,52 +998,84 @@
     }
 
     function processCheckout(event) {
-      event.preventDefault();
-      if (!cart.length) { toast("Agrega al menos un producto antes de enviar."); return; }
+  event.preventDefault();
+  if (!cart.length) {
+    toast("Agrega al menos un producto antes de enviar.");
+    return;
+  }
 
-      const form = event.target;
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      const phone = $("#cust-phone").value.trim();
-      if (phone.replace(/\D/g, "").length < 7) { $("#cust-phone").setCustomValidity("Escribe un teléfono válido"); $("#cust-phone").reportValidity(); $("#cust-phone").setCustomValidity(""); return; }
+  const form = event.target;
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
 
-      const orderData = {
-        token: CONFIG.API_TOKEN,
-        cliente: {
-          nombre: $("#cust-name").value.trim(),
-          telefono: phone,
-          direccion: $("#cust-address").value.trim(),
-          notas: $("#cust-notes").value.trim()
-        },
-        items: cart.map((l) => ({ id: l.id, grupo: l.grupo, nombre: l.nombre, precio: l.precio, cantidad: l.cantidad, nota: l.nota, mensaje: l.mensaje })),
-        total: cartTotal()
-      };
+  const phone = $("#cust-phone").value.trim();
+  if (phone.replace(/\D/g, "").length < 7) {
+    $("#cust-phone").setCustomValidity("Escribe un teléfono válido");
+    $("#cust-phone").reportValidity();
+    $("#cust-phone").setCustomValidity("");
+    return;
+  }
 
-      sendOrder(orderData);
+  const orderData = {
+    token: CONFIG.API_TOKEN,
+    cliente: {
+      nombre: $("#cust-name").value.trim(),
+      telefono: phone,
+      direccion: $("#cust-address").value.trim(),
+      notas: $("#cust-notes").value.trim()
+    },
+    items: cart.map((l) => ({
+      id: l.id,
+      grupo: l.grupo,
+      nombre: l.nombre,
+      precio: l.precio,
+      cantidad: l.cantidad,
+      nota: l.nota,
+      mensaje: l.mensaje
+    })),
+    total: cartTotal()
+  };
 
-      let msg = "✨ *NUEVO PEDIDO - AMORES LYS* ✨\n\n";
-      msg += `👤 *Cliente:* ${orderData.cliente.nombre}\n`;
-      msg += `📞 *Teléfono:* ${orderData.cliente.telefono}\n`;
-      msg += `📍 *Dirección:* ${orderData.cliente.direccion}\n`;
-      if (orderData.cliente.notas) msg += `📝 *Notas:* ${orderData.cliente.notas}\n`;
-      msg += "\n🛒 *DETALLE DEL PEDIDO:*\n";
-      cart.forEach((l) => {
-        msg += `• ${l.nombre} (x${l.cantidad}) - ${cop(l.precio * l.cantidad)}\n`;
-        if (l.nota) msg += `   Aroma: ${l.nota}\n`;
-        if (l.mensaje) msg += `   Etiqueta: "${l.mensaje}"\n`;
-      });
-      msg += `\n💰 *TOTAL A PAGAR:* ${cop(orderData.total)}`;
+  // 1. Envía el pedido al backend (Google Apps Script)
+  sendOrder(orderData);
 
-      const waUrl = `https://wa.me/${CONFIG.PHONE_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  // 2. Prepara el resumen para WhatsApp
+  let msg = "✨ *NUEVO PEDIDO - AMORES LYS* ✨\n\n";
+  msg += `👤 *Cliente:* ${orderData.cliente.nombre}\n`;
+  msg += `📞 *Teléfono:* ${orderData.cliente.telefono}\n`;
+  msg += `📍 *Dirección:* ${orderData.cliente.direccion}\n`;
+  if (orderData.cliente.notas) msg += `📝 *Notas:* ${orderData.cliente.notas}\n`;
+  msg += "\n🛒 *DETALLE DEL PEDIDO:*\n";
+  cart.forEach((l) => {
+    msg += `• ${l.nombre} (x${l.cantidad}) - ${cop(l.precio * l.cantidad)}\n`;
+    if (l.nota) msg += `   Aroma: ${l.nota}\n`;
+    if (l.mensaje) msg += `   Etiqueta: "${l.mensaje}"\n`;
+  });
+  msg += `\n💰 *TOTAL A PAGAR:* ${cop(orderData.total)}`;
+
+const waUrl =`https://wa.me/${CONFIG.PHONE_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+  // 3. Notificación Toast inmediata
+  toast("¡Tu pedido se ha guardado con éxito!");
+
+  // 4. Pregunta opcional para enviar copia por WhatsApp
+  setTimeout(() => {
+    const wantWhatsApp = confirm("¡Tu pedido se ha guardado con éxito!\n\n¿Deseas enviar una copia por WhatsApp?");
+    if (wantWhatsApp) {
       const w = window.open(waUrl, "_blank");
       if (!w) window.location.href = waUrl;
-
-      cart = [];
-      saveCart();
-      renderCart();
-      form.reset();
-      closeModal();
-      toast("¡Pedido enviado! Te esperamos en WhatsApp.");
     }
+  }, 300);
+
+  // 5. Limpieza del carrito y cierre de la ventana modal
+  cart = [];
+  saveCart();
+  renderCart();
+  form.reset();
+  closeModal();
+}
 
     /* =========================================================
     MODALES, TOAST Y EVENTOS
