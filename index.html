@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FAF6F0" />
+  <meta name="description" content="Amores Lys: velas ecológicas de cera de soya, aromaterapia y detalles personalizados para eventos." />
+  <title>Amores Lys | Velas Artesanales & Cera de Soya</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23C88EA7'/%3E%3Cpath d='M32 10c5 7 8 11 8 16a8 8 0 0 1-16 0c0-5 3-9 8-16z' fill='%23FAF6F0'/%3E%3Crect x='22' y='34' width='20' height='20' rx='4' fill='%23FAF6F0'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Figtree:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+    SISTEMA DE DISEÑO: ARENA & ROSA EMPOLVADO (tokens CSS)
+    ========================================================= */
+    :root {
+      --bg-arena: #FAF6F0;
+      --surface-lino: #F3EDE6;
+      --rosa-primario: #C88EA7;
+      --rosa-hover: #B37591;
+      --rosa-pastel: #F4E3ED;
+      --color-texto: #4A3E3D;
+      --color-suave: #7A6E6D;
+      --color-borde: #E2D7CE;
+      --color-blanco: #FFFFFF;
+      --whatsapp: #1FA855;
+      --shadow-soft: 0 4px 18px rgba(74, 62, 61, 0.07);
+      --shadow-lift: 0 10px 26px rgba(74, 62, 61, 0.12);
+      --radius-card: 16px;
+      --font-titulo: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-cuerpo: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --gutter: 16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font-cuerpo);
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--color-texto);
+      background-color: var(--bg-arena);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    body.no-scroll { overflow: hidden; }
+
+    h1, h2, h3, .logo { font-family: var(--font-titulo); font-weight: 700; line-height: 1.2; }
+    button, input, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    :focus-visible { outline: 3px solid var(--rosa-hover); outline-offset: 2px; }
+
+    .container { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: var(--gutter); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+
+    /* ---------- Botones base ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 44px; padding: 10px 18px;
+      border-radius: 999px; border: 1px solid var(--rosa-primario);
+      background: var(--color-blanco); color: var(--rosa-hover);
+      font-weight: 600; transition: background .2s, transform .2s, box-shadow .2s, color .2s;
+    }
+    .btn:hover { background: var(--rosa-pastel); transform: translateY(-1px); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .btn-primary {
+      background: var(--rosa-primario); border-color: var(--rosa-primario); color: var(--color-blanco);
+      box-shadow: 0 4px 12px rgba(200, 142, 167, .3);
+    }
+    .btn-primary:hover { background: var(--rosa-hover); border-color: var(--rosa-hover); }
+    .btn-soft { background: var(--surface-lino); }
+    .btn-whatsapp {
+      background: var(--whatsapp); border-color: var(--whatsapp); color: #fff;
+      width: 100%; border-radius: 14px; min-height: 52px; font-weight: 700;
+      box-shadow: 0 4px 12px rgba(31, 168, 85, .3);
+    }
+    .btn-whatsapp:hover { background: #188a46; border-color: #188a46; }
+
+    .icon-btn {
+      display: inline-grid; place-items: center; width: 44px; height: 44px;
+      border: 1px solid var(--color-borde); background: var(--color-blanco);
+      border-radius: 50%; font-size: 1.1rem; transition: background .2s;
+    }
+    .icon-btn:hover { background: var(--rosa-pastel); }
+
+    /* =========================================================
+    HEADER [LOGO] [Buscar] [Carrito(0)]
+    ========================================================= */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface-lino);
+      box-shadow: var(--shadow-soft);
+    }
+    .navbar .container {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; min-height: 66px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.35rem; color: var(--rosa-primario); text-decoration: none;
+    }
+    .logo-mark { width: 34px; height: 34px; flex: none; }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .cart-count {
+      display: inline-grid; place-items: center;
+      min-width: 22px; height: 22px; padding: 0 6px;
+      background: var(--color-blanco); color: var(--rosa-hover);
+      border-radius: 999px; font-size: .8rem; font-weight: 700;
+    }
+    .btn-label-long { display: none; }
+
+    /* =========================================================
+    HERO BANNER + COLLAGE
+    ========================================================= */
+    .hero { padding-block: 24px 8px; }
+    .hero-card {
+      background: var(--surface-lino);
+      border-radius: 24px;
+      padding: 28px 16px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
+    .hero-card h1 { font-size: clamp(1.6rem, 6vw, 2.6rem); max-width: 22ch; margin: 0 auto 10px; }
+    .hero-card .lead { color: var(--color-suave); font-size: 1.05rem; max-width: 46ch; margin: 0 auto 22px; }
+
+    .collage {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      max-width: 860px; margin-inline: auto;
+    }
+    .collage-item {
+      background: none; border: 0; padding: 0; text-align: center;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .collage-item img {
+      width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+      border-radius: 14px; box-shadow: var(--shadow-soft);
+      transition: transform .3s;
+    }
+    .collage-item:hover img { transform: scale(1.03); }
+    .collage-item span { font-size: .85rem; font-weight: 600; line-height: 1.25; }
+
+    /* ---------- Esqueletos de carga ---------- */
+    .skeleton {
+      background: linear-gradient(90deg, var(--surface-lino) 25%, #fbf8f4 50%, var(--surface-lino) 75%);
+      background-size: 200% 100%; animation: shimmer 1.4s infinite;
+      border-radius: 14px;
+    }
+    .skeleton.sk-collage { aspect-ratio: 3 / 4; }
+    .skeleton.sk-card { height: 340px; border-radius: var(--radius-card); }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    /* =========================================================
+    BÚSQUEDA + FILTROS POR CATEGORÍA
+    ========================================================= */
+    .controls { padding-block: 24px 8px; display: flex; flex-direction: column; gap: 14px; }
+    .search-wrap { position: relative; }
+    .search-wrap svg {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      width: 20px; height: 20px; color: var(--color-suave); pointer-events: none;
+    }
+    #search-input {
+      width: 100%; min-height: 50px; padding: 12px 18px 12px 46px;
+      border: 1px solid var(--color-borde); border-radius: 999px;
+      background: var(--color-blanco); outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    #search-input:focus { border-color: var(--rosa-primario); box-shadow: 0 0 0 4px var(--rosa-pastel); }
+
+    .filters-title { font-size: .9rem; font-weight: 600; letter-spacing: .02em; }
+    .chips { display: flex; gap: 10px; overflow-x: auto; padding-block: 4px 8px; scrollbar-width: thin; }
+    .chip {
+      flex: none; min-height: 40px; padding: 8px 18px;
+      border: 1px solid transparent; background: var(--surface-lino);
+      border-radius: 999px; font-weight: 600; white-space: nowrap;
+      transition: background .2s, color .2s;
+    }
+    .chip:hover { background: var(--rosa-pastel); }
+    .chip[aria-pressed="true"] { background: var(--rosa-primario); color: var(--color-blanco); }
+
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 18px 0 14px; }
+    .section-head h2 { font-size: 1.35rem; }
+    .section-head small { color: var(--color-suave); }
+
+    /* =========================================================
+    GRID DEL CATÁLOGO
+    ========================================================= */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .state-msg {
+      grid-column: 1 / -1; text-align: center; padding: 36px 16px;
+      background: var(--surface-lino); border-radius: var(--radius-card); color: var(--color-suave);
+    }
+    .state-msg .btn { margin-top: 14px; }
+
+    .card {
+      position: relative; background: var(--color-blanco);
+      border-radius: var(--radius-card); padding: 14px;
+      box-shadow: var(--shadow-soft);
+      display: flex; flex-direction: column; gap: 12px;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+    .card-media { position: relative; border: 0; padding: 0; background: none; border-radius: 12px; overflow: hidden; }
+    .card-media img { width: 100%; height: 210px; object-fit: cover; border-radius: 12px; }
+    .card.is-out .card-media img { filter: grayscale(.7); opacity: .75; }
+    .badge-out {
+      position: absolute; left: 10px; top: 10px;
+      background: var(--color-texto); color: var(--color-blanco);
+      padding: 4px 12px; border-radius: 999px; font-size: .78rem; font-weight: 600;
+    }
+    .badge-cat {
+      align-self: flex-start; background: var(--rosa-pastel); color: var(--rosa-hover);
+      padding: 2px 10px; border-radius: 999px; font-size: .75rem; font-weight: 600;
+    }
+    .fav-btn {
+      position: absolute; right: 10px; top: 10px; z-index: 2;
+      width: 40px; height: 40px; border-radius: 50%; border: 0;
+      background: rgba(255, 255, 255, .92); display: grid; place-items: center;
+      box-shadow: var(--shadow-soft); transition: transform .2s;
+    }
+    .fav-btn:hover { transform: scale(1.1); }
+    .fav-btn svg { width: 20px; height: 20px; fill: none; stroke: var(--rosa-hover); stroke-width: 2; transition: fill .2s; }
+    .fav-btn[aria-pressed="true"] svg { fill: var(--rosa-primario); stroke: var(--rosa-primario); }
+
+    .card-title { font-size: 1.1rem; }
+    .card-desc {
+      font-size: .9rem; color: var(--color-suave); line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      min-height: 2.8em;
+    }
+    .card-price { color: var(--rosa-hover); font-weight: 700; font-size: 1.2rem; }
+    .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
+    .card-actions .btn { padding-inline: 10px; font-size: .92rem; }
+
+    .reco { margin-top: 28px; }
+    .reco .grid { grid-template-columns: 1fr; }
+
+    /* =========================================================
+    MODALES (detalle + carrito)
+    ========================================================= */
+    .overlay {
+      position: fixed; inset: 0; z-index: 200;
+      display: flex; background: rgba(74, 62, 61, .45);
+      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+    }
+    .overlay[hidden] { display: none !important; }
+    .overlay.is-detail { align-items: flex-end; justify-content: center; }
+    .overlay.is-drawer { justify-content: flex-end; }
+
+    .sheet {
+      background: var(--bg-arena); width: 100%;
+      display: flex; flex-direction: column; overflow: hidden;
+      animation: rise .28s ease both;
+    }
+    .detail-sheet { max-height: 94vh; border-radius: 24px 24px 0 0; }
+    .drawer-sheet { max-width: 460px; height: 100%; animation-name: slide; }
+    @keyframes rise { from { transform: translateY(24px); opacity: 0; } }
+    @keyframes slide { from { transform: translateX(32px); opacity: 0; } }
+
+    .sheet-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 18px; background: var(--surface-lino);
+      border-bottom: 1px solid var(--color-borde);
+    }
+    .sheet-head h2 { font-size: 1.15rem; }
+    .sheet-body { overflow-y: auto; padding: 18px; flex: 1; }
+
+    /* ---- detalle ---- */
+    .detail-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .gallery-main { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px; box-shadow: var(--shadow-soft); background: var(--surface-lino); }
+    .thumbs { display: flex; gap: 8px; margin-top: 10px; }
+    .thumb {
+      width: 64px; height: 64px; padding: 0; border-radius: 10px; overflow: hidden;
+      border: 2px solid transparent; background: none;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb[aria-current="true"] { border-color: var(--rosa-primario); }
+
+    .info { display: flex; flex-direction: column; gap: 14px; }
+    .info h3 { font-size: 1.5rem; }
+    .info .meta { color: var(--color-suave); font-size: .95rem; }
+    .info .price { font-size: 1.4rem; font-weight: 700; color: var(--rosa-hover); }
+    .field-label { display: block; font-weight: 600; margin-bottom: 6px; font-size: .95rem; }
+    .aromas { display: flex; flex-wrap: wrap; gap: 8px; }
+    .aroma {
+      position: relative; display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border: 1px solid var(--color-borde); background: var(--color-blanco);
+      border-radius: 999px; cursor: pointer; font-size: .92rem;
+    }
+    .aroma input { accent-color: var(--rosa-hover); }
+    .aroma:has(input:checked) { background: var(--rosa-pastel); border-color: var(--rosa-primario); }
+
+    textarea, .text-input {
+      width: 100%; padding: 12px; border: 1px solid var(--color-borde);
+      border-radius: 10px; background: var(--color-blanco); outline: none; resize: vertical;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    textarea:focus, .text-input:focus { border-color: var(--rosa-primario); box-shadow: 0 0 0 4px var(--rosa-pastel); }
+    .counter { text-align: right; font-size: .8rem; color: var(--color-suave); }
+
+    .stepper { display: inline-flex; align-items: center; gap: 8px; }
+    .stepper output { min-width: 36px; text-align: center; font-weight: 700; font-size: 1.1rem; }
+    .qty-btn {
+      width: 36px; height: 36px; border-radius: 50%; border: 0;
+      background: var(--surface-lino); font-weight: 700; font-size: 1.1rem;
+    }
+    .qty-btn:hover { background: var(--rosa-pastel); }
+    .detail-actions { display: grid; gap: 10px; }
+
+    /* ---- carrito ---- */
+    .cart-items { display: flex; flex-direction: column; }
+    .cart-item {
+      display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center;
+      padding: 12px 0; border-bottom: 1px dashed var(--color-borde);
+    }
+    .cart-item img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; }
+    .cart-item .name { font-weight: 600; line-height: 1.25; }
+    .cart-item .sub { font-size: .82rem; color: var(--color-suave); }
+    .cart-item .line-total { font-weight: 700; text-align: right; font-size: .95rem; }
+    .cart-item .controls-row { grid-column: 2 / 4; display: flex; align-items: center; justify-content: space-between; }
+    .link-btn { background: none; border: 0; color: var(--rosa-hover); text-decoration: underline; font-size: .85rem; }
+    .empty-cart { text-align: center; padding: 30px 10px; color: var(--color-suave); }
+
+    .cart-foot {
+      border-top: 1px solid var(--color-borde); background: var(--surface-lino);
+      padding: 16px 18px 20px;
+    }
+    .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+    .form-title { font-weight: 600; margin-bottom: 8px; }
+    .form-row { margin-bottom: 8px; }
+    .form-row label { display: block; font-size: .85rem; margin-bottom: 3px; }
+
+    /* ---------- Toast ---------- */
+    .toast {
+      position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 20px);
+      background: var(--color-texto); color: var(--color-blanco);
+      padding: 12px 20px; border-radius: 999px; font-weight: 600; font-size: .92rem;
+      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+      z-index: 400; max-width: calc(100% - 32px); text-align: center;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    footer { margin-top: auto; padding: 36px var(--gutter) 28px; text-align: center; color: var(--color-suave); font-size: .9rem; }
+    .main-wrap { padding-bottom: 40px; }
+
+    /* =========================================================
+    RESPONSIVE (Mobile-First: se amplía hacia pantallas grandes)
+    ========================================================= */
+    @media (min-width: 560px) {
+      :root { --gutter: 24px; }
+      .btn-label-long { display: inline; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-card { padding: 36px 28px 28px; }
+      .collage { gap: 18px; }
+      .collage-item img { aspect-ratio: 1; }
+      .collage-item span { font-size: .95rem; }
+    }
+    @media (min-width: 720px) {
+      .overlay.is-detail { align-items: center; padding: 24px; }
+      .detail-sheet { max-width: 920px; border-radius: 24px; max-height: 90vh; }
+      .detail-grid { grid-template-columns: 1fr 1.05fr; gap: 28px; }
+    }
+    @media (min-width: 960px) {
+      :root { --gutter: 32px; }
+      .grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .reco .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="navbar">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Amores Lys, inicio">
+        <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#C88EA7"></rect>
+          <path d="M32 10c5 7 8 11 8 16a8 8 0 0 1-16 0c0-5 3-9 8-16z" fill="#FAF6F0"></path>
+          <rect x="22" y="34" width="20" height="20" rx="4" fill="#FAF6F0"></rect>
+        </svg>
+        Amores Lys
+      </a>
+      <nav class="nav-actions" aria-label="Acciones principales">
+        <button class="btn" data-action="search" type="button" aria-label="Buscar productos">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <span class="btn-label-long">Buscar</span>
+        </button>
+        <button class="btn btn-primary" data-action="open-cart" type="button" aria-label="Abrir el carrito">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="17" cy="20" r="1.2"></circle></svg>
+          <span class="btn-label-long">Carrito</span>
+          <span class="cart-count" id="cart-count" aria-live="polite">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrap" id="top">
+
+    <!-- ===================== HERO BANNER (RF02) ===================== -->
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-card">
+        <h1 id="hero-title">Ilumina tus momentos con esencia artesanal</h1>
+        <p class="lead">Velas ecológicas de cera de soya con esencias naturales</p>
+        <div class="collage" id="hero-collage">
+          <div class="skeleton sk-collage"></div>
+          <div class="skeleton sk-collage"></div>
+          <div class="skeleton sk-collage"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BÚSQUEDA Y FILTROS ===================== -->
+    <section class="controls container" aria-label="Búsqueda y filtros" id="catalogo">
+      <div class="search-wrap">
+        <label class="sr-only" for="search-input">Buscar vela o aroma</label>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input type="search" id="search-input" placeholder="Buscar vela o aroma preferido..." autocomplete="off" />
+      </div>
+      <div>
+        <p class="filters-title" id="filters-title">Filtros por categoría</p>
+        <div class="chips" id="category-chips" role="group" aria-labelledby="filters-title">
+          <button class="chip" type="button" aria-pressed="true" data-action="chip" data-cat="TODOS">Todos</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CATÁLOGO (RF01) ===================== -->
+    <section class="container" aria-labelledby="catalog-title">
+      <div class="section-head">
+        <h2 id="catalog-title">Catálogo de productos</h2>
+        <small id="catalog-count" aria-live="polite"></small>
+      </div>
+      <div class="grid" id="catalog-grid" aria-busy="true">
+        <div class="skeleton sk-card"></div>
+        <div class="skeleton sk-card"></div>
+        <div class="skeleton sk-card"></div>
+      </div>
+    </section>
+
+    <!-- ===================== RECOMENDACIONES (RF05) ===================== -->
+    <section class="container reco" id="reco-section" aria-labelledby="reco-title" hidden>
+      <div class="section-head">
+        <h2 id="reco-title">Pensado para ti</h2>
+        <small>Según tus favoritos y lo que has explorado</small>
+      </div>
+      <div class="grid" id="reco-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Amores Lys · Velas ecológicas de cera de soya · Hecho a mano en Colombia</p>
+  </footer>
+
+  <!-- ===================== MODAL: DETALLE Y PERSONALIZACIÓN ===================== -->
+  <div class="overlay is-detail" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden>
+    <div class="sheet detail-sheet">
+      <div class="sheet-head">
+        <h2 id="d-title">Detalle y personalización</h2>
+        <button class="icon-btn" type="button" data-action="close" aria-label="Cerrar detalle">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="detail-grid">
+          <div>
+            <img class="gallery-main" id="d-img" alt="" referrerpolicy="no-referrer" />
+            <div class="thumbs" id="d-thumbs"></div>
+          </div>
+          <div class="info">
+            <div>
+              <h3 id="d-name"></h3>
+              <p class="meta">Categoría: <span id="d-cat"></span></p>
+              <p class="price" id="d-price"></p>
+            </div>
+            <div>
+              <span class="field-label">Descripción</span>
+              <p id="d-desc"></p>
+            </div>
+            <div id="d-aromas-wrap" hidden>
+              <span class="field-label" id="d-aromas-label">Selección de notas olfativas</span>
+              <div class="aromas" id="d-aromas" role="radiogroup" aria-labelledby="d-aromas-label"></div>
+            </div>
+            <div>
+              <label class="field-label" for="d-msg">Mensaje personalizado de la etiqueta</label>
+              <textarea id="d-msg" rows="2" maxlength="80" placeholder="Escribe aquí tu mensaje personalizado..."></textarea>
+              <div class="counter"><span id="d-msg-count">0</span>/80</div>
+            </div>
+            <div>
+              <span class="field-label" id="d-qty-label">Cantidad</span>
+              <div class="stepper" role="group" aria-labelledby="d-qty-label">
+                <button class="qty-btn" type="button" data-action="d-qty" data-d="-1" aria-label="Restar una unidad">−</button>
+                <output id="d-qty" aria-live="polite">1</output>
+                <button class="qty-btn" type="button" data-action="d-qty" data-d="1" aria-label="Sumar una unidad">+</button>
+              </div>
+            </div>
+            <div class="detail-actions">
+              <button class="btn" type="button" id="d-fav" data-action="d-fav" aria-pressed="false">♡ Agregar a favoritos</button>
+              <button class="btn btn-primary" type="button" id="d-add" data-action="d-add">Añadir al carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL DRAWER: CARRITO Y CHECKOUT (RF03) ===================== -->
+  <div class="overlay is-drawer" id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+    <div class="sheet drawer-sheet">
+      <div class="sheet-head">
+        <h2 id="cart-title">Carrito de compras</h2>
+        <button class="icon-btn" type="button" data-action="close" aria-label="Cerrar carrito">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="cart-items" id="cart-items"></div>
+      </div>
+      <form class="cart-foot" id="checkout-form" novalidate>
+        <div class="total-row"><span>Total a pagar</span><span id="cart-total">$0 COP</span></div>
+        <p class="form-title">Datos para el envío</p>
+        <div class="form-row">
+          <label for="cust-name">Nombre completo *</label>
+          <input class="text-input" type="text" id="cust-name" name="name" autocomplete="name" required />
+        </div>
+        <div class="form-row">
+          <label for="cust-phone">Teléfono / WhatsApp *</label>
+          <input class="text-input" type="tel" id="cust-phone" name="tel" autocomplete="tel" inputmode="tel" required />
+        </div>
+        <div class="form-row">
+          <label for="cust-address">Dirección de entrega *</label>
+          <input class="text-input" type="text" id="cust-address" name="address" autocomplete="street-address" required />
+        </div>
+        <div class="form-row">
+          <label for="cust-notes">Notas especiales (opcional)</label>
+          <textarea id="cust-notes" name="notes" rows="2" maxlength="300"></textarea>
+        </div>
+        <button type="submit" class="btn btn-whatsapp" id="submit-order">Confirmar y enviar pedido por WhatsApp 📲</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript><p style="padding:24px;text-align:center">Para ver el catálogo de Amores Lys necesitas activar JavaScript.</p></noscript>
+
+  <script>
+    /* =========================================================
+    CONFIGURACIÓN DEL BACKEND SERVERLESS (Google Apps Script)
+    ========================================================= */
+    const CONFIG = {
+      APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzwGMFd6We4AspPQKu__pVNb0A4RyQkyP_t9blYCp3t4_CHbIc49lNq2TN2nqbsRReu/exec",
+      API_TOKEN: "acaingweb123",
+      PHONE_WHATSAPP: "573000000000",   // ← reemplaza por el número real
+      TIMEOUT_MS: 12000,
+      MAX_QTY: 99
+    };
+
+    const KEYS = { cart: "lys_cart", favs: "lys_favs", viewed: "lys_viewed", cache: "lys_catalog_cache" };
+
+    /* ---------- utilidades ---------- */
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const cop = (n) => "$" + Number(n || 0).toLocaleString("es-CO") + " COP";
+    const fold = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    const store = {
+      get(key, fallback) {
+        try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; }
+      },
+      set(key, value) {
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* modo privado o sin espacio */ }
+      }
+    };
+
+    /* Convierte URL / ID de Google Drive a un enlace directo de imagen */
+    function driveUrl(u) {
+      const s = String(u || "").trim();
+      if (!s) return "";
+      if (/^[\w-]{25,}$/.test(s)) return `https://drive.google.com/thumbnail?id=${s}&sz=w1000`;
+      if (!/(drive|docs)\.google\.com|googleusercontent\.com/.test(s)) return s;
+      const m = s.match(/\/d\/([\w-]+)/) || s.match(/[?&]id=([\w-]+)/);
+      return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000` : s;
+    }
+
+    /* Marcador SVG cuando una imagen falla (RNF04) */
+    function placeholderSVG(name) {
+      const letter = esc((name || "L").trim().charAt(0).toUpperCase() || "L");
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="#F3EDE6"/><circle cx="200" cy="200" r="150" fill="#F4E3ED"/><path d="M200 105c22 30 34 48 34 70a34 34 0 0 1-68 0c0-22 12-40 34-70z" fill="#C88EA7"/><rect x="160" y="215" width="80" height="78" rx="14" fill="#B37591"/><text x="200" y="266" font-family="Georgia,serif" font-size="40" fill="#FAF6F0" text-anchor="middle">${letter}</text></svg>`;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+    const img = (src, alt, cls = "", name = "") =>
+      `<img ${cls ? `class="${cls}"` : ""} src="${esc(src || placeholderSVG(name || alt))}" alt="${esc(alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-name="${esc(name || alt)}">`;
+    document.addEventListener("error", (e) => {
+      const t = e.target;
+      if (t && t.tagName === "IMG" && !t.dataset.fb) {
+        t.dataset.fb = "1";
+        t.src = placeholderSVG(t.dataset.name || t.alt);
+      }
+    }, true);
+
+    /* ---------- estado ---------- */
+    let catalog = [];
+    let cart = store.get(KEYS.cart, []);
+    let favs = new Set(store.get(KEYS.favs, []));
+    let viewed = store.get(KEYS.viewed, []);
+    let activeCategory = "TODOS";
+    let searchTerm = "";
+    let detail = null;
+    let lastFocus = null;
+
+    /* ---------- normalización de datos del catálogo ---------- */
+    function normalize(raw) {
+      const precio = Number(String(raw.precio ?? 0).replace(/[^\d]/g, "")) || 0;
+      const estado = String(raw.activo ?? "true").trim().toLowerCase();
+      const activo = !["false", "no", "0", "agotado", "inactivo"].includes(estado);
+      const fotos = String(raw.foto || "").split(/[|;\n]+/).map((s) => s.trim()).filter(Boolean).map(driveUrl);
+      return {
+        id: String(raw.id ?? ""),
+        grupo: String(raw.grupo || "General").trim(),
+        nombre: String(raw.nombre || "Producto"),
+        precio,
+        foto: fotos[0] || "",
+        fotos,
+        descripcion: String(raw.descripcion || ""),
+        activo
+      };
+    }
+
+    const AROMAS = [
+      ["Lavanda", "lavanda"], ["Manzanilla", "manzanilla"], ["Vainilla", "vainilla"], ["Miel", "miel"],
+      ["Sándalo", "sandalo"], ["Canela", "canela"], ["Coco", "coco"], ["Jazmín", "jazmin"],
+      ["Cítricos", "citric"], ["Eucalipto", "eucalipto"], ["Café", "cafe"]
+    ];
+    const aromasOf = (p) => {
+      const t = fold(p.nombre + " " + p.descripcion);
+      return AROMAS.filter(([, k]) => t.includes(k)).map(([n]) => n);
+    };
+
+    /* =========================================================
+    RED: GET directo → JSONP de respaldo (RNF04)
+    ========================================================= */
+    const apiUrl = (extra = "") => `${CONFIG.APPS_SCRIPT_URL}?token=${encodeURIComponent(CONFIG.API_TOKEN)}${extra}`;
+
+    function getJSON() {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), CONFIG.TIMEOUT_MS);
+      return fetch(apiUrl(), { signal: ctrl.signal })
+        .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .finally(() => clearTimeout(timer));
+    }
+
+    function getJSONP() {
+      return new Promise((resolve, reject) => {
+        const cb = "__lys_cb_" + Date.now();
+        const script = document.createElement("script");
+        const cleanup = () => { clearTimeout(timer); delete window[cb]; script.remove(); };
+        const timer = setTimeout(() => { cleanup(); reject(new Error("JSONP timeout")); }, CONFIG.TIMEOUT_MS);
+        window[cb] = (data) => { cleanup(); resolve(data); };
+        script.onerror = () => { cleanup(); reject(new Error("JSONP error")); };
+        script.src = apiUrl("&callback=" + cb);
+        document.head.appendChild(script);
+      });
+    }
+
+    async function fetchCatalog() {
+      $("#catalog-grid").setAttribute("aria-busy", "true");
+      let data = null;
+      try { data = await getJSON(); }
+      catch (e1) {
+        try { data = await getJSONP(); } catch (e2) { console.warn("No se pudo consultar el backend:", e1, e2); }
+      }
+
+      if (data && !Array.isArray(data) && data.status === "error") {
+        showCatalogError(data.message || "El servidor devolvió un error.");
+        return;
+      }
+
+      if (Array.isArray(data)) {
+        store.set(KEYS.cache, data);
+      } else {
+        const cached = store.get(KEYS.cache, null);
+        if (Array.isArray(cached) && cached.length) {
+          data = cached;
+          toast("Sin conexión: mostrando el último catálogo guardado.");
+        }
+      }
+
+      if (!Array.isArray(data)) {
+        showCatalogError("No pudimos cargar el catálogo. Revisa tu conexión e inténtalo de nuevo.");
+        return;
+      }
+
+      catalog = data.map(normalize).filter((p) => p.id);
+      syncCart();
+      renderAll();
+      $("#catalog-grid").setAttribute("aria-busy", "false");
+    }
+
+    function showCatalogError(msg) {
+      $("#catalog-grid").innerHTML = `
+      <div class="state-msg" role="alert">
+        <p>${esc(msg)}</p>
+        <button class="btn btn-primary" type="button" data-action="retry">Reintentar</button>
+      </div>`;
+      $("#hero-collage").innerHTML = "";
+      $("#catalog-grid").setAttribute("aria-busy", "false");
+    }
+
+    /* =========================================================
+    RENDER
+    ========================================================= */
+    function renderAll() {
+      renderHero();
+      renderChips();
+      renderGrid();
+      renderReco();
+      renderCart();
+    }
+
+    function renderHero() {
+      const box = $("#hero-collage");
+      let items = catalog.filter((p) => fold(p.grupo) === "collage").slice(0, 3);
+      if (!items.length) items = catalog.filter((p) => p.activo).slice(0, 3);
+      box.innerHTML = items.map((p) => `
+      <button class="collage-item" type="button" data-action="open-detail" data-id="${esc(p.id)}" aria-label="Ver ${esc(p.nombre)}">
+        ${img(p.foto, p.nombre)}
+        <span>${esc(p.nombre)}</span>
+      </button>`).join("");
+    }
+
+    function renderChips() {
+      const groups = [...new Set(catalog.map((p) => p.grupo))];
+      const chips = [
+        ["TODOS", "Todos"],
+        ["FAVORITOS", `♥ Favoritos (${favs.size})`],
+        ...groups.map((g) => [g, g])
+      ];
+      $("#category-chips").innerHTML = chips.map(([key, label]) =>
+        `<button class="chip" type="button" data-action="chip" data-cat="${esc(key)}" aria-pressed="${key === activeCategory}">${esc(label)}</button>`
+      ).join("");
+    }
+
+    function cardHTML(p) {
+      const fav = favs.has(p.id);
+      return `
+      <article class="card ${p.activo ? "" : "is-out"}">
+        <button class="fav-btn" type="button" data-action="fav" data-id="${esc(p.id)}" aria-pressed="${fav}" aria-label="${fav ? "Quitar de favoritos" : "Agregar a favoritos"}: ${esc(p.nombre)}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.3C1.1 8.3 3 5 6.4 5c2 0 3.7 1.1 5.6 3.3C13.9 6.100 15.600 5 17.600 5 21 5 22.900 8.300 21.500 11.700 19.500 16.400 12 21 12 21z"></path></svg>
+        </button>
+        <button class="card-media" type="button" data-action="open-detail" data-id="${esc(p.id)}" aria-label="Ver detalle de ${esc(p.nombre)}">
+          ${img(p.foto, p.nombre)}
+          ${p.activo ? "" : '<span class="badge-out">Agotado</span>'}
+        </button>
+        <span class="badge-cat">${esc(p.grupo)}</span>
+        <h3 class="card-title">${esc(p.nombre)}</h3>
+        <p class="card-desc">${esc(p.descripcion)}</p>
+        <div class="card-price">${cop(p.precio)}</div>
+        <div class="card-actions">
+          <button class="btn" type="button" data-action="open-detail" data-id="${esc(p.id)}">Ver detalle</button>
+          <button class="btn btn-soft" type="button" data-action="add" data-id="${esc(p.id)}" ${p.activo ? "" : "disabled"}>${p.activo ? "Agregar al carrito" : "Agotado"}</button>
+        </div>
+      </article>`;
+    }
+
+    function renderGrid() {
+      const grid = $("#catalog-grid");
+      const q = fold(searchTerm);
+      const list = catalog.filter((p) => {
+        const byCat = activeCategory === "TODOS" || (activeCategory === "FAVORITOS" ? favs.has(p.id) : p.grupo === activeCategory);
+        const bySearch = !q || fold(p.nombre).includes(q) || fold(p.descripcion).includes(q) || fold(p.grupo).includes(q);
+        return byCat && bySearch;
+      });
+      $("#catalog-count").textContent = list.length ? `${list.length} ${list.length === 1 ? "producto" : "productos"}` : "";
+
+      if (!list.length) {
+        const msg = activeCategory === "FAVORITOS" && !favs.size
+          ? "Aún no tienes favoritos. Toca el corazón de una vela para guardarla."
+          : "No encontramos velas para esta búsqueda.";
+        grid.innerHTML = `<div class="state-msg">${msg}</div>`;
+        return;
+      }
+      grid.innerHTML = list.map(cardHTML).join("");
+    }
+
+    /* Recomendaciones por favoritos y categorías/aromas explorados (RF05) */
+    function recommendations() {
+      const seedIds = [...new Set([...favs, ...viewed])];
+      const seed = seedIds.map((id) => catalog.find((p) => p.id === id)).filter(Boolean);
+      if (!seed.length) return [];
+      const grupos = new Map();
+      const aromas = new Set();
+      seed.forEach((p) => {
+        grupos.set(p.grupo, (grupos.get(p.grupo) || 0) + 1);
+        aromasOf(p).forEach((a) => aromas.add(a));
+      });
+      return catalog
+        .filter((p) => p.activo && !favs.has(p.id) && !seed.includes(p))
+        .map((p) => ({ p, s: (grupos.get(p.grupo) || 0) * 2 + aromasOf(p).filter((a) => aromas.has(a)).length * 3 }))
+        .filter((x) => x.s > 0)
+        .sort((a, b) => b.s - a.s)
+        .slice(0, 3)
+        .map((x) => x.p);
+    }
+
+    function renderReco() {
+      const list = recommendations();
+      const section = $("#reco-section");
+      section.hidden = !list.length;
+      $("#reco-grid").innerHTML = list.map(cardHTML).join("");
+    }
+
+    /* ---------- favoritos ---------- */
+    function toggleFav(id) {
+      favs.has(id) ? favs.delete(id) : favs.add(id);
+      store.set(KEYS.favs, [...favs]);
+      renderChips();
+      renderGrid();
+      renderReco();
+      if (detail && detail.product.id === id) updateDetailUI();
+    }
+
+    /* =========================================================
+    DETALLE DEL PRODUCTO
+    ========================================================= */
+    function openDetail(id) {
+      const p = catalog.find((x) => x.id === id);
+      if (!p) return;
+      viewed = [id, ...viewed.filter((v) => v !== id)].slice(0, 8);
+      store.set(KEYS.viewed, viewed);
+
+      const aromas = aromasOf(p);
+      detail = { product: p, qty: 1, nota: aromas[0] || "", fotoIdx: 0, mensaje: "" };
+
+      $("#d-name").textContent = p.nombre;
+      $("#d-cat").textContent = p.grupo;
+      $("#d-price").textContent = cop(p.precio);
+      $("#d-desc").textContent = p.descripcion || "Vela artesanal de cera de soya.";
+      $("#d-msg").value = "";
+      $("#d-msg-count").textContent = "0";
+
+      const wrap = $("#d-aromas-wrap");
+      wrap.hidden = !aromas.length;
+      $("#d-aromas").innerHTML = aromas.map((a, i) =>
+        `<label class="aroma"><input type="radio" name="nota" value="${esc(a)}" ${i === 0 ? "checked" : ""}> ${esc(a)}</label>`
+      ).join("");
+
+      const fotos = p.fotos.length ? p.fotos : [""];
+      $("#d-thumbs").innerHTML = fotos.length > 1
+        ? fotos.map((f, i) => `<button class="thumb" type="button" data-action="thumb" data-i="${i}" aria-label="Foto ${i + 1}" aria-current="${i === 0}">${img(f, "Miniatura " + (i + 1), "", p.nombre)}</button>`).join("")
+        : "";
+
+      updateDetailUI();
+      openModal("#detail-modal");
+      renderReco();
+    }
+
+    function updateDetailUI() {
+      if (!detail) return;
+      const { product: p, qty, fotoIdx } = detail;
+      const fotos = p.fotos.length ? p.fotos : [""];
+      const main = $("#d-img");
+      delete main.dataset.fb;
+      main.dataset.name = p.nombre;
+      main.alt = p.nombre;
+      main.src = fotos[fotoIdx] || placeholderSVG(p.nombre);
+      document.querySelectorAll("#d-thumbs .thumb").forEach((t, i) => t.setAttribute("aria-current", String(i === fotoIdx)));
+      $("#d-qty").textContent = qty;
+      const fav = favs.has(p.id);
+      const favBtn = $("#d-fav");
+      favBtn.setAttribute("aria-pressed", String(fav));
+      favBtn.textContent = fav ? "♥ Quitar de favoritos" : "♡ Agregar a favoritos";
+      const add = $("#d-add");
+      add.disabled = !p.activo;
+      add.textContent = p.activo ? `Añadir al carrito · ${cop(p.precio * qty)}` : "Producto agotado";
+    }
+
+    /* =========================================================
+    CARRITO
+    ========================================================= */
+    const lineKey = (id, nota, mensaje) => [id, nota, mensaje].join("|");
+
+    function addToCart(product, qty = 1, nota = "", mensaje = "") {
+      if (!product.activo) return;
+      const key = lineKey(product.id, nota, mensaje);
+      const line = cart.find((l) => l.key === key);
+      if (line) line.cantidad = Math.min(CONFIG.MAX_QTY, line.cantidad + qty);
+      else cart.push({ key, id: product.id, nombre: product.nombre, precio: product.precio, grupo: product.grupo, foto: product.foto, cantidad: qty, nota, mensaje });
+      saveCart();
+      renderCart();
+      toast(`Agregado: ${product.nombre}`);
+    }
+
+    function saveCart() { store.set(KEYS.cart, cart); }
+
+    function syncCart() {
+      cart = cart.filter((l) => catalog.some((p) => p.id === l.id && p.activo)).map((l) => {
+        const p = catalog.find((x) => x.id === l.id);
+        return { ...l, precio: p.precio, nombre: p.nombre, foto: p.foto, grupo: p.grupo };
+      });
+      saveCart();
+    }
+
+    function cartTotal() { return cart.reduce((acc, l) => acc + l.precio * l.cantidad, 0); }
+
+    function renderCart() {
+      const units = cart.reduce((a, l) => a + l.cantidad, 0);
+      $("#cart-count").textContent = units;
+      $("#cart-total").textContent = cop(cartTotal());
+      const box = $("#cart-items");
+      if (!cart.length) {
+        box.innerHTML = '<p class="empty-cart">Tu carrito está vacío.<br>Agrega tus velas favoritas para empezar.</p>';
+        return;
+      }
+      box.innerHTML = cart.map((l, i) => `
+      <div class="cart-item">
+        ${img(l.foto, l.nombre, "", l.nombre)}
+        <div>
+          <div class="name">${esc(l.nombre)} (x${l.cantidad})</div>
+          <div class="sub">${cop(l.precio)} c/u${l.nota ? " · " + esc(l.nota) : ""}</div>
+          ${l.mensaje ? `<div class="sub">Etiqueta: “${esc(l.mensaje)}”</div>` : ""}
+        </div>
+        <div class="line-total">${cop(l.precio * l.cantidad)}</div>
+        <div class="controls-row">
+          <div class="stepper">
+            <button class="qty-btn" type="button" data-action="line-qty" data-i="${i}" data-d="-1" aria-label="Restar una unidad de ${esc(l.nombre)}">−</button>
+            <output>${l.cantidad}</output>
+            <button class="qty-btn" type="button" data-action="line-qty" data-i="${i}" data-d="1" aria-label="Sumar una unidad de ${esc(l.nombre)}">+</button>
+          </div>
+          <button class="link-btn" type="button" data-action="line-remove" data-i="${i}">Quitar</button>
+        </div>
+      </div>`).join("");
+    }
+
+    function changeLine(i, delta) {
+      const l = cart[i];
+      if (!l) return;
+      l.cantidad = Math.min(CONFIG.MAX_QTY, l.cantidad + delta);
+      if (l.cantidad <= 0) cart.splice(i, 1);
+      saveCart();
+      renderCart();
+    }
+
+    /* =========================================================
+    CHECKOUT → Apps Script (RF04) + WhatsApp (RF03)
+    ========================================================= */
+    function sendOrder(payload) {
+      const body = JSON.stringify(payload);
+      const beacon = () => { try { navigator.sendBeacon(CONFIG.APPS_SCRIPT_URL, new Blob([body], { type: "text/plain;charset=utf-8" })); } catch { /* sin respaldo */ } };
+      try {
+        fetch(CONFIG.APPS_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body,
+          keepalive: true
+        }).catch(beacon);
+      } catch { beacon(); }
+    }
+
+    function processCheckout(event) {
+      event.preventDefault();
+      if (!cart.length) { toast("Agrega al menos un producto antes de enviar."); return; }
+
+      const form = event.target;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const phone = $("#cust-phone").value.trim();
+      if (phone.replace(/\D/g, "").length < 7) { $("#cust-phone").setCustomValidity("Escribe un teléfono válido"); $("#cust-phone").reportValidity(); $("#cust-phone").setCustomValidity(""); return; }
+
+      const orderData = {
+        token: CONFIG.API_TOKEN,
+        cliente: {
+          nombre: $("#cust-name").value.trim(),
+          telefono: phone,
+          direccion: $("#cust-address").value.trim(),
+          notas: $("#cust-notes").value.trim()
+        },
+        items: cart.map((l) => ({ id: l.id, grupo: l.grupo, nombre: l.nombre, precio: l.precio, cantidad: l.cantidad, nota: l.nota, mensaje: l.mensaje })),
+        total: cartTotal()
+      };
+
+      sendOrder(orderData);
+
+      let msg = "✨ *NUEVO PEDIDO - AMORES LYS* ✨\n\n";
+      msg += `👤 *Cliente:* ${orderData.cliente.nombre}\n`;
+      msg += `📞 *Teléfono:* ${orderData.cliente.telefono}\n`;
+      msg += `📍 *Dirección:* ${orderData.cliente.direccion}\n`;
+      if (orderData.cliente.notas) msg += `📝 *Notas:* ${orderData.cliente.notas}\n`;
+      msg += "\n🛒 *DETALLE DEL PEDIDO:*\n";
+      cart.forEach((l) => {
+        msg += `• ${l.nombre} (x${l.cantidad}) - ${cop(l.precio * l.cantidad)}\n`;
+        if (l.nota) msg += `   Aroma: ${l.nota}\n`;
+        if (l.mensaje) msg += `   Etiqueta: "${l.mensaje}"\n`;
+      });
+      msg += `\n💰 *TOTAL A PAGAR:* ${cop(orderData.total)}`;
+
+      const waUrl = `https://wa.me/${CONFIG.PHONE_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+      const w = window.open(waUrl, "_blank");
+      if (!w) window.location.href = waUrl;
+
+      cart = [];
+      saveCart();
+      renderCart();
+      form.reset();
+      closeModal();
+      toast("¡Pedido enviado! Te esperamos en WhatsApp.");
+    }
+
+    /* =========================================================
+    MODALES, TOAST Y EVENTOS
+    ========================================================= */
+    function openModal(sel) {
+      closeModal(true);
+      lastFocus = document.activeElement;
+      const m = $(sel);
+      m.hidden = false;
+      document.body.classList.add("no-scroll");
+      const first = m.querySelector('[data-action="close"]');
+      if (first) first.focus();
+    }
+
+    function closeModal(silent = false) {
+      document.querySelectorAll(".overlay").forEach((m) => { m.hidden = true; });
+      document.body.classList.remove("no-scroll");
+      if (!silent && lastFocus && lastFocus.focus) lastFocus.focus();
+      if (!silent) detail = null;
+    }
+
+    let toastTimer;
+    function toast(text) {
+      const t = $("#toast");
+      t.textContent = text;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+    }
+
+    document.addEventListener("click", (e) => {
+      const overlay = e.target.classList && e.target.classList.contains("overlay") ? e.target : null;
+      if (overlay) { closeModal(); return; }
+
+      const el = e.target.closest("[data-action]");
+      if (!el) return;
+      const { action, id, cat, i, d } = el.dataset;
+      const product = id ? catalog.find((p) => p.id === id) : null;
+
+      switch (action) {
+        case "open-detail": openDetail(id); break;
+        case "add": if (product) addToCart(product); break;
+        case "fav": toggleFav(id); break;
+        case "chip": activeCategory = cat; renderChips(); renderGrid(); break;
+        case "search": {
+          const input = $("#search-input");
+          input.scrollIntoView({ behavior: "smooth", block: "center" });
+          setTimeout(() => input.focus({ preventScroll: true }), 350);
+          break;
+        }
+        case "open-cart": renderCart(); openModal("#cart-modal"); break;
+        case "close": closeModal(); break;
+        case "retry": fetchCatalog(); break;
+        case "line-qty": changeLine(Number(i), Number(d)); break;
+        case "line-remove": changeLine(Number(i), -Infinity); break;
+        case "thumb": if (detail) { detail.fotoIdx = Number(i); updateDetailUI(); } break;
+        case "d-qty": if (detail) { detail.qty = Math.max(1, Math.min(CONFIG.MAX_QTY, detail.qty + Number(d))); updateDetailUI(); } break;
+        case "d-fav": if (detail) toggleFav(detail.product.id); break;
+        case "d-add":
+          if (detail) {
+            const msg = $("#d-msg").value.trim();
+            addToCart(detail.product, detail.qty, detail.nota, msg);
+            closeModal();
+          }
+          break;
+      }
+    });
+
+    document.addEventListener("change", (e) => {
+      if (e.target.name === "nota" && detail) detail.nota = e.target.value;
+    });
+
+    $("#d-msg").addEventListener("input", (e) => { $("#d-msg-count").textContent = e.target.value.length; });
+    $("#search-input").addEventListener("input", (e) => { searchTerm = e.target.value; renderGrid(); });
+    $("#checkout-form").addEventListener("submit", processCheckout);
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.key === "Escape" && !$("#detail-modal").hidden) || (e.key === "Escape" && !$("#cart-modal").hidden)) closeModal();
+    });
+
+    /* ---------- inicio ---------- */
+    renderCart();
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fetchCatalog);
+    else fetchCatalog();
+  </script>
+</body>
+</html>
